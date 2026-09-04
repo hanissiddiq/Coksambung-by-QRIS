@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "author": "Hanis Siddiq",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": -57.4, "left": -182.4, "attrs": {} },
+    { "type": "wokwi-relay-module", "id": "relay2", "top": 317, "left": -220.8, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -147.6,
+      "left": -121,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 361.2,
+      "left": -73,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -130.45,
+      "left": -76.8,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 368.75,
+      "left": -38.4,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:GND.1", "relay1:GND", "black", [ "h-206.21", "v-182" ] ],
+    [ "esp:GND.1", "relay2:GND", "black", [ "h-263.81", "v67.2", "v125.2" ] ],
+    [ "esp:GND.1", "led1:C", "black", [ "v57.6", "h-197.01" ] ],
+    [ "esp:GND.1", "led2:C", "black", [ "h-81.41", "v268.8", "h18.8" ] ],
+    [ "esp:5V", "relay1:VCC", "red", [ "h-215.81", "v-240" ] ],
+    [ "esp:5V", "relay2:VCC", "red", [ "h-23.81", "v28.8", "h-220.8", "v105.6" ] ],
+    [ "esp:12", "relay1:IN", "blue", [ "h-196.61", "v-163" ] ],
+    [ "esp:27", "relay2:IN", "blue", [ "h-52.61", "v182.4", "h-182.4", "v48.2" ] ],
+    [ "esp:14", "r1:1", "green", [ "h-33.41", "v-172.8", "h28.8", "v-57.6", "v-19.2", "h-76.8" ] ],
+    [ "r1:2", "led1:A", "green", [ "h-1.2", "v19.2" ] ],
+    [ "esp:26", "r2:1", "green", [ "h-43.01", "v172.8", "h48" ] ],
+    [ "r2:2", "led2:A", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
