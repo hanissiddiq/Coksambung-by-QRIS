@@ -12,7 +12,7 @@ const char* password = "";
 
 // URL Endpoint Server Anda (Tempat ESP32 mengecek status pembayaran)
 // const char* serverUrl = "https://domain-anda.com";
-const char* serverUrl = "https://b49b-110-136-83-241.ngrok-free.app";
+const char* serverUrl = "https://e76f-2404-c0-5416-f64e-84a4-ac7b-6054-f51d.ngrok-free.app";
 
 // Definisi Pin ESP32
 const int RELAY_SLOT1 = 12;
@@ -59,35 +59,50 @@ void setup() {
 
   WiFi.mode(WIFI_STA);
 
-  // Channel 6 sesuai jaringan virtual Wokwi
-  WiFi.begin(ssid, password, 6);
 
-  int retry = 0;
 
-  while (WiFi.status() != WL_CONNECTED && retry < 30) {
 
-    delay(500);
 
-    Serial.print(".");
 
-    retry++;
-  }
 
-  if (WiFi.status() == WL_CONNECTED) {
+  
 
-    Serial.println("==============================");
-    Serial.println("WIFI TERHUBUNG!");
-    Serial.println("==============================");
+Serial.println("Menghubungkan ke Wokwi-GUEST...");
+WiFi.begin(ssid, password);
 
-    Serial.print("SSID       : ");
-    Serial.println(WiFi.SSID());
+int retry = 0;
 
-    Serial.print("IP ESP32   : ");
-    Serial.println(WiFi.localIP());
+while (WiFi.status() != WL_CONNECTED && retry < 40) {
+  delay(500);
+  Serial.print(".");
+  retry++;
+}
 
-    Serial.print("RSSI       : ");
-    Serial.println(WiFi.RSSI());
-    
+Serial.println();
+
+if (WiFi.status() == WL_CONNECTED) {
+
+  Serial.println("==============================");
+  Serial.println("WIFI TERHUBUNG!");
+  Serial.println("==============================");
+
+  Serial.print("SSID     : ");
+  Serial.println(WiFi.SSID());
+
+  Serial.print("IP ESP32 : ");
+  Serial.println(WiFi.localIP());
+
+  Serial.print("RSSI     : ");
+  Serial.println(WiFi.RSSI());
+
+} else {
+
+  Serial.println("==============================");
+  Serial.println("WIFI GAGAL TERHUBUNG!");
+  Serial.println("==============================");
+
+  Serial.print("WiFi Status: ");
+  Serial.println(WiFi.status());
 }
 }
 
@@ -159,7 +174,7 @@ void resetStatusServer(int slot) {
   // Endpoint untuk mereset status di database agar tidak dibaca berulang kali
   // String resetUrl = "https://domain-anda.com" + String(slot);
   // String resetUrl = "https://b49b-110-136-83-241.ngrok-free.app" + String(slot);
-  String resetUrl = "https://b49b-110-136-83-241.ngrok-free.app/api/reset_status?slot=" + String(slot);
+  String resetUrl = "https://e76f-2404-c0-5416-f64e-84a4-ac7b-6054-f51d.ngrok-free.app/api/reset_status?slot=" + String(slot);
   http.begin(resetUrl);
   int httpResponseCode = http.GET();
   http.end();
